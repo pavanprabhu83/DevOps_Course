@@ -15,7 +15,7 @@ resource "aws_instance" "webserver01" {
 }
 
 resource "aws_iam_role" "session_manager_role" {
-  name = "test_role"
+  name = "test_role2"
 
   assume_role_policy = <<EOF
 {
