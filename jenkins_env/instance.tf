@@ -10,7 +10,7 @@ resource "aws_instance" "webserver01" {
         Name = "Pavans Ubuntu Machine"
         email = "123@gmail.com"
     }
-    key_name = "ap-south-1-terraform-demo"
+    //key_name = "ap-south-1-terraform-demo"
     vpc_security_group_ids = [aws_security_group.mysg.id]
 }
 
