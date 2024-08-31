@@ -11,7 +11,7 @@ resource "aws_instance" "webserver01" {
         email = "123@gmail.com"
     }
     //key_name = "ap-south-1-terraform-demo"
-    vpc_security_group_ids = [aws_security_group.mysg.id]
+    vpc_security_group_ids = [aws_security_group.mysg1.id]
 }
 
 resource "aws_iam_role" "session_manager_role" {
@@ -76,11 +76,11 @@ policy_arn = aws_iam_policy.ssm_policy.arn
     
 }
 
-resource "aws_security_group"  "mysg" {
+resource "aws_security_group"  "mysg1" {
     egress = [
         {
             cidr_blocks = ["0.0.0.0/0",]
-            description = "Pavans home network"
+            description = "home network"
             from_port = 0
             protocol = "-1"
             to_port = 0
@@ -94,7 +94,7 @@ resource "aws_security_group"  "mysg" {
     ingress = [
         {
             cidr_blocks = ["0.0.0.0/0",]
-            description = "Pavans home network"
+            description = "home network"
             from_port = 0
             protocol = "-1"
             to_port = 0
