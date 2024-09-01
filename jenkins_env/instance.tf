@@ -2,12 +2,12 @@ resource "aws_instance" "webserver01" {
     ami = "ami-04e49d62cf88738f1"
     # ami = var.image_id
 
-    instance_type = "t2.micro"
+    instance_type = "t2.medium"
 
     # tags = var.default_tags
 
     tags = {
-        Name = "Pavans Ubuntu Machine"
+        Name = "Jenkins Machine"
         email = "123@gmail.com"
     }
     //key_name = "ap-south-1-terraform-demo"
