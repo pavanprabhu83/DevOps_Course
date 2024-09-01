@@ -126,3 +126,65 @@ Jenkins Environment Setup:
 		> terraform init
 		> terraform plan
 		> terraform apply
+		
+	2. Once the terraform apply is successful, go to the EC2 instances dashboard in AWS console and check your EC2 instance status
+	3. Give around 5 mins for your instance to be available is AWS session manager
+	4. Now type session manager in the search bar on top left within AWS console.
+	5. Click on start session
+	6. Select the EC2 instance that you launched in the previous step under target instances section and cilck on start session.
+	7. Soon you should see the shell prompt with in the new browser window as below
+		sh-5.2$
+		
+		Now type bash in the prompt
+		sh-5.2$ bash
+		
+		you should now see the prompt as ssm-user
+		[ssm-user@ip-172-31-22-61 bin]$
+		
+	8. Downloading and installing Jenkins
+		Execute the below commands in the order
+		Ensure that your software packages are up to date on your instance by using the following command to perform a quick software update:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum update –y
+		
+		Add the Jenkins repo using the following command:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+		
+		Import a key file from Jenkins-CI to enable installation from the package:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum upgrade
+		
+		Install Java (Amazon Linux 2023):
+		[ssm-user@ip-172-31-22-61 bin]$ sudo dnf install java-17-amazon-corretto -y
+		
+		Install Jenkins:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum install jenkins -y
+		
+		Enable the Jenkins service to start at boot:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl enable jenkins
+		
+		Start Jenkins as a service:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl start jenkins
+		
+		You can check the status of the Jenkins service using the command
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl status jenkins
+		
+	9. Configuring Jenkins
+		Connect to http://<your_server_public_DNS>:8080 from your browser. You will be able to access Jenkins through its management interface:
+		To know the public IP of your EC2 instance, navigate to the EC2 dashboard in AWS console, select your EC2 instance, In the Details tab, under Instance summary you can find the Public IPv4 address
+		browse this link http://<your_server_public_DNS>:8080
+		
+		As prompted, enter the password found in /var/lib/jenkins/secrets/initialAdminPassword.
+		Use the following command to display this password:
+		sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+		
+		The Jenkins installation script directs you to the Customize Jenkins page. Click Install suggested plugins.
+		
+		Once the installation is complete, the Create First Admin User will open. Enter your information, and then select Save and Continue.
+		
+		On the left-hand side, select Manage Jenkins, and then select Manage Plugins.
+		
+		Now your Jenkins environment is ready for use.
+		
+		
+		
+		
