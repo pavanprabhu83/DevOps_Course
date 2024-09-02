@@ -1,54 +1,190 @@
-Git Devops Link:
-https://github.com/pavanprabhu83/DevOps_Course.git
+Local Environment Setup:
+	1. Installation of Vagrant and Oracle Virtual Box.
+		Vagrant Setup - Follow the instructions in the link - https://developer.hashicorp.com/vagrant/install#windows
+		Virtual Box - Follow the instructions in the link - https://download.virtualbox.org/virtualbox/7.0.20/VirtualBox-7.0.20-163906-Win.exe
+	2. Vagrant Environment:
+		Choose any Drive in Windows that you are comfortable with, traverse to the Drive in windows cmd utility
+		C:
+		> mkdir Vagrant
+		> cd Vagrant
+		> mkdir Ubuntu
+		> cd Ubuntu
+		To add a vagrant Box into virtual box
+			> vagrant box add ubuntu/trusty64
+			
+		Initialize the box
+			> vagrant init ubuntu/trusty64
+			
+		Bring the VM to running state
+			> vagrant up
+			
+		Login to your VM box
+			> vagrant ssh
+			
+		update your packages
+			> sudo apt update -y
+			
+		Install Git
+			> sudo apt install git -y
+			
+		Install aws cli
+			> sudo apt install zip -y
+			> sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+			> sudo unzip awscliv2.zip
+			> sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 
-Install Vagrant
-https://developer.hashicorp.com/vagrant/install
+		Install Python
+			> sudo apt update -y
+			> sudo wget https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tgz
+			> sudo tar -xvf Python-3.12.5.tgz
+			> cd Python-3.12.5
+			> sudo ./configure --enable-optimizations
+			> sudo make install
+			
+		Terraform Installation
+			In Windows: Download the Terraform binary from the below link,
+			https://releases.hashicorp.com/terraform/1.9.5/terraform_1.9.5_windows_amd64.zip
+			
+			Copy the zip file into your C:/Vagrant/Ubuntu and Now login to vagrant box
+			
+			Launch cmd
+			> cd C:/Vagrant/Ubuntu
+			> vagrant up
+			> vagrant ssh
+			
+			check the below file using ls and then unzip it,
+			> unzip terraform_1.9.5_linux_386.zip
+			
+			Then move the terraform binary/exe file to /usr/local/bin
+			> sudo mv terraform /usr/local/bin/
+			
+			Now verify the terraform version using the below command,
+			> terraform --version
+	3. Install Git for Windows in your windows local environment
+		https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe
+		
+	4. Install VS Code
+		https://code.visualstudio.com/download and then click on Windows button
+	
 
-Install Oracle Virtual Box
-https://www.virtualbox.org/wiki/Downloads
+AWS Account Creation:
+	1. AWS Account Setup - Follow the below link to create AWS account:
+		https://signin.aws.amazon.com/signup?request_type=register - Complete all the 5 steps
+		
+	2. Login to your AWS console and authenticate
+		https://console.aws.amazon.com/
+		
+	3. Type IAM in search bar within AWS console (next to Services on top left) and select IAM service 
+	
+	4. Selet Users from the left pane and then click on Create User Button (Amber color)
+	
+	5. Type in user name in the User name box and click on Next button leaving other settings as is.
+	
+	6. Click on Next leaving other settings as is.
+	
+	7. Click on Create user leaving other settings as is.
 
-To add a vagrant Box into virtual box
-vagrant box add ubuntu/trusty64
+	8. In the main user dashboard click on the created user that you have created in the previous step.
+	
+	9. Slightly scroll down and navigate to the Security Credentials tab, scroll down a bit and navigate to access keys section and select create access key.
+	
+	10. Select the first use case as command line interface and tick the check box for confirmation. Select Next.
+	
+	11. Type a description for your access key, Ex: Pavan's Access Key and then click on Create access key button
+	
+	12. Scroll down and click on Download .csv file and keep it safe in your local drive.
+	
+	13. Login to your Vagrant Box from Windows cmd
+		> vagrant up (if not already started the VM)
+		> vagrant ssh
+		> aws configure
+		When its prompted to enter your secrete access ID and secret access Key, copy and paste it from the downloaded key file in previous step.
+		default region - select the default region which is nearest to you. More details about the AWS region here https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+		Press Enter for format.
+		> you should now see a .aws/credentials file created under the location ~/.aws/credentials
+		> cat ~/.aws/credentials
 
-Initialize the box
-vagrant init ubuntu/trusty64
-
-Bring the VM to running state
-vagrant up
-
-login to your VM box
-vagrant ssh
-
-update your packages
-sudo apt update -y
-
-Install Git
-sudo apt install git -y
-
-Install aws cli
-sudo apt install zip -y
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-sudo unzip awscliv2.zip
-sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
-
-Install Python
-sudo apt update -y
-sudo wget https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tgz
-sudo tar -xvf Python-3.12.5.tgz
-cd Python-3.12.5
-sudo ./configure --enable-optimizations
-sudo make install
-
-Terraform Installation
-sudo wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-sudo echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
-
-
-
-
-
-
-
-
-
+GitHub Account Creation:
+	1. Navigate to https://github.com/.
+	2. Click Sign up.
+	3. Follow the prompts to create your personal account.
+	
+Jenkins Environment Setup:
+	1. Login to your Vagrant Box from Windows cmd
+		> vagrant up (if not already started the VM)
+		> vagrant ssh
+		> cd ~/
+		> mkdir DevOps
+		> cd DevOps
+		> mkdir Jenkins
+		> cd Jenkins
+		> git clone https://github.com/pavanprabhu83/DevOps_Course.git
+		> cd DevOps_Course
+		> rm -rf .git
+		Modify the values as necessary in instance.tf file on line number 10 and 11 if you want to name the instance differently, and then save the file.
+		> cd DevOps_Course/jenkins_env
+		> terraform init
+		> terraform plan
+		> terraform apply
+		
+	2. Once the terraform apply is successful, go to the EC2 instances dashboard in AWS console and check your EC2 instance status
+	3. Give around 5 mins for your instance to be available is AWS session manager
+	4. Now type session manager in the search bar on top left within AWS console.
+	5. Click on start session
+	6. Select the EC2 instance that you launched in the previous step under target instances section and cilck on start session.
+	7. Soon you should see the shell prompt with in the new browser window as below
+		sh-5.2$
+		
+		Now type bash in the prompt
+		sh-5.2$ bash
+		
+		you should now see the prompt as ssm-user
+		[ssm-user@ip-172-31-22-61 bin]$
+		
+	8. Downloading and installing Jenkins
+		Execute the below commands in the order
+		Ensure that your software packages are up to date on your instance by using the following command to perform a quick software update:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum update –y
+		
+		Add the Jenkins repo using the following command:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+		
+		Import a key file from Jenkins-CI to enable installation from the package:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum upgrade
+		
+		Install Java (Amazon Linux 2023):
+		[ssm-user@ip-172-31-22-61 bin]$ sudo dnf install java-17-amazon-corretto -y
+		
+		Install Jenkins:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo yum install jenkins -y
+		
+		Enable the Jenkins service to start at boot:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl enable jenkins
+		
+		Start Jenkins as a service:
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl start jenkins
+		
+		You can check the status of the Jenkins service using the command
+		[ssm-user@ip-172-31-22-61 bin]$ sudo systemctl status jenkins
+		
+	9. Configuring Jenkins
+		Connect to http://<your_server_public_DNS>:8080 from your browser. You will be able to access Jenkins through its management interface:
+		To know the public IP of your EC2 instance, navigate to the EC2 dashboard in AWS console, select your EC2 instance, In the Details tab, under Instance summary you can find the Public IPv4 address
+		browse this link http://<your_server_public_DNS>:8080
+		
+		As prompted, enter the password found in /var/lib/jenkins/secrets/initialAdminPassword.
+		Use the following command to display this password:
+		sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+		
+		The Jenkins installation script directs you to the Customize Jenkins page. Click Install suggested plugins.
+		
+		Once the installation is complete, the Create First Admin User will open. Enter your information, and then select Save and Continue.
+		
+		On the left-hand side, select Manage Jenkins, and then select Manage Plugins.
+		
+		Now your Jenkins environment is ready for use.
+		
+		
+		
+		
