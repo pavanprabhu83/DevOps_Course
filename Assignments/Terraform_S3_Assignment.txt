@@ -1,0 +1,6 @@
+Assignment:
+
+1. Add additional tags to your bucket
+	email
+	region
+2. Trun off the block public access for policy and public acls.
