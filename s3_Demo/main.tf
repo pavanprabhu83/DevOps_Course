@@ -6,14 +6,3 @@ resource "aws_s3_bucket" "example" {
     Environment = "Dev"
   }
 }
-
-resource "aws_s3_bucket_versioning" "versioning_example" {
-  bucket = aws_s3_bucket.example.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-output "s3_bucket_id" {
-  value = aws_s3_bucket.example.id
-}
