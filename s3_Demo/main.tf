@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "terraform_backend" {
-  bucket = "devops_sept2024_terraform_backend_ec2"
+  bucket = "devops-sept2024-terraform-backend-ec2"
 
   tags = {
   Name        = "Terraform state file"
