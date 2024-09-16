@@ -51,15 +51,16 @@ Local Environment Setup:
 			> cd C:/Vagrant/Ubuntu
 			> vagrant up
 			> vagrant ssh
+
+                        In Linux: Download the Terraform binary and install the Terraform binary
+                        1. Download the Terraform binary and install the Terraform binary
+			# curl -LO https://releases.hashicorp.com/terraform/1.9.5/terraform_1.9.5_linux_amd64.zip
+			# sudo apt-get install -y unzip
+			# unzip terraform_1.9.5_linux_amd64.zip
+                        2. Move the Terraform binary to /usr/local/bin & Verify the installation
+			# sudo mv terraform /usr/local/bin/
+			# terraform -version
 			
-			check the below file using ls and then unzip it,
-			> unzip terraform_1.9.5_linux_386.zip
-			
-			Then move the terraform binary/exe file to /usr/local/bin
-			> sudo mv terraform /usr/local/bin/
-			
-			Now verify the terraform version using the below command,
-			> terraform --version
 	3. Install Git for Windows in your windows local environment
 		https://github.com/git-for-windows/git/releases/download/v2.46.0.windows.1/Git-2.46.0-64-bit.exe
 		
@@ -127,7 +128,7 @@ Jenkins Environment Setup:
 		> terraform plan
 		> terraform apply
 		
-	2. Once the terraform apply is successful, go to the EC2 instances dashboard in AWS console and check your EC2 instance status
+	2. Once the terraform apply is successful, go to the EC2 instances dashboard in AWS console and check your EC2 instance status, Select the EC2 instance and click on actions and select security and modify the IAM roles and select IAM instant profile which is created. Click on update IAM role.
 	3. Give around 5 mins for your instance to be available is AWS session manager
 	4. Now type session manager in the search bar on top left within AWS console.
 	5. Click on start session
