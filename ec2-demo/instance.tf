@@ -2,7 +2,7 @@ resource "aws_instance" "webserver01" {
     ami = "ami-0fa8fe6f147dc938b"
     # ami = var.image_id
 
-    instance_type = "t2.micro"
+    instance_type = "t3.micro"
 
     # tags = var.default_tags
 
