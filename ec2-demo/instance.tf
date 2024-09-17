@@ -1,15 +1,12 @@
 resource "aws_instance" "webserver01" {
-    ami = "ami-0fa8fe6f147dc938b"
+    ami = var.image_id
     # ami = var.image_id
 
-    instance_type = "t3.micro"
+    instance_type = var.instance_type
 
     # tags = var.default_tags
 
-    tags = {
-        Name = "Amazon-Linux Test Machine"
-        email = "pavan@gmail.com"
-    }
+    tags = var.default_tags
     //key_name = "ap-south-1-terraform-demo"
     vpc_security_group_ids = [aws_security_group.mysg.id]
 }
