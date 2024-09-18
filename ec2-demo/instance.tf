@@ -1,5 +1,5 @@
 resource "aws_instance" "webserver01" {
-    ami = var.image_id
+    ami = data.aws_ami.ami_demo.image_id
     # ami = var.image_id
 
     instance_type = var.instance_type

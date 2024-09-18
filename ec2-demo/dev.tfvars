@@ -1,4 +1,4 @@
-image_id = "ami-0fa8fe6f147dc938b"
+# image_id = "ami-0fa8fe6f147dc938b"
 
 default_tags = {
     Name = "Amazon-Linux Test Machine",
