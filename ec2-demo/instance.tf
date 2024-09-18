@@ -5,7 +5,7 @@ resource "aws_instance" "webserver01" {
     instance_type = var.instance_type
 
     # tags = var.default_tags
-
+    user_data = "${file("userdata.sh")}"  
     tags = var.default_tags
     //key_name = "ap-south-1-terraform-demo"
     vpc_security_group_ids = [aws_security_group.mysg.id]
