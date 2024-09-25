@@ -17,9 +17,15 @@ resource "aws_iam_role" "ssm_role" {
 }
 EOF
 
-  inline_policy {
-    name = "session_manager_policy"
+  tags = {
+      Name = "EC2 ssm profile"
+  }
+}
 
+resource "aws_iam_role_policy" "ec2_ssm_policy" {
+
+  name = "ssm_policy"
+  role = aws_iam_role.ssm_role.id
   policy = <<EOF
 {
     "Version": "2012-10-17",
@@ -38,11 +44,6 @@ EOF
     ]
 }
 EOF
-  }
-
-  tags = {
-      Name = "EC2 ssm profile"
-  }
 }
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
@@ -54,7 +55,7 @@ output "iam_instance_profile_name" {
     value = aws_iam_instance_profile.ec2_instance_profile.name
 }
 
-resource "aws_iam_role_policy_attachment" "ssm-policy" {
-role       = aws_iam_role.ssm_role.name
-policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-}
+# resource "aws_iam_role_policy_attachment" "ssm-policy" {
+# role       = aws_iam_role.ssm_role.name
+# policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+# }
