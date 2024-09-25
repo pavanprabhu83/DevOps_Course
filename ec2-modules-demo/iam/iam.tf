@@ -17,6 +17,29 @@ resource "aws_iam_role" "ssm_role" {
 }
 EOF
 
+  inline_policy {
+    name = "session_manager_policy"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:UpdateInstanceInformation",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+  }
+
   tags = {
       Name = "EC2 ssm profile"
   }
