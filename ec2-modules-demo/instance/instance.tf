@@ -12,5 +12,5 @@ resource "aws_instance" "webserver01" {
   user_data = "${file("userdata.sh")}"  
   tags = var.default_tags
   //key_name = "ap-south-1-terraform-demo"
-  vpc_security_group_ids = [module.ec2_security.id]
+  vpc_security_group_ids = [module.ec2_security.security_group_id]
 }
