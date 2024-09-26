@@ -1,0 +1,3 @@
+Two ways of passing the values to the variables at runtime.
+terraform plan -var="image_id=ami-0fa8fe6f147dc938b" -var='default_tags={"name":"Amazon-Linux Test Machine","email":"123@gmail.com"}' -var="instance_type=t2.micro"
+terraform plan -var-file=dev.tfvars
