@@ -1,9 +1,9 @@
 module "ec2_security" {
-  source = "../security"
+  source = "s3:://https://pvn-devops-course-modules.s3.eu-west-1.amazonaws.com/security.gz"
 }
 
 module "ec2_iam" {
-  source = "../iam"
+  source = "s3:://https://pvn-devops-course-modules.s3.eu-west-1.amazonaws.com/iam.gz"
 }
 
 resource "aws_instance" "webserver01" {
