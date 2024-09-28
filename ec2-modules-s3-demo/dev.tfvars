@@ -5,4 +5,4 @@ default_tags = {
     email = "pavan@gmail.com"
 }
 
-instance_type = "t3.micro"
+instance_type = "t2.micro"
